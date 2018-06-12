@@ -1,7 +1,8 @@
-#le {
+#le-layout {
     width: 800px;
     height: 200px;
     background: yellow;
+    margin: 0 auto;
 }
 
 .split-pane-container {
