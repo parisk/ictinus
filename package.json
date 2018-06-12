@@ -1,0 +1,16 @@
+{
+  "name": "layout",
+  "version": "0.1.0",
+  "main": "src/main.ts",
+  "author": "Paris Kasidiaris <paris@sourcelair.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "node-sass": "^4.9.0",
+    "typescript": "^2.9.1"
+  },
+  "scripts": {
+    "start": "http-server ./public/"
+  }
+}
