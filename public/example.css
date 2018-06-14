@@ -1,0 +1,29 @@
+#horizontal-example {
+  width: 60vw;
+  height: 200px;
+  background: yellow;
+  margin: 0 auto;
+}
+
+#horizontal-example .split-pane-element:first-child {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+#horizontal-example .split-pane-element:last-child {
+  background-color: rgba(0, 0, 255, 0.5);
+}
+
+#vertical-example {
+  height: 40vh;
+  width: 200px;
+  background: green;
+  margin: 0 auto;
+}
+
+#vertical-example .split-pane-element:first-child {
+  background-color: rgba(256, 0, 0, 0.5);
+}
+
+#vertical-example .split-pane-element:last-child {
+  background-color: rgba(0, 0, 256, 0.5);
+}
