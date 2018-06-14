@@ -4,6 +4,9 @@ class SplitLayout {
   private rect: DOMRect;
 
   constructor(public readonly container: HTMLElement) {
+    if (!container.classList.contains('split-pane-container')) {
+      throw new Error('Cannot initialize Split Layout in a container without the "split-pane-container" class.');
+    }
     this.gutter = this.container.querySelector('.split-pane-gutter');
 
     this.gutter.addEventListener('mousedown', e => {
