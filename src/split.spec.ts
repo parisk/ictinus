@@ -6,7 +6,6 @@ import { SplitLayout } from './split';
 
 chai.use(spies);
 
-
 describe('SplitLayout', () => {
   describe('#constructor', () => {
     const container = document.createElement('div');
