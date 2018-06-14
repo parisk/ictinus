@@ -1,54 +1,54 @@
-.split-pane-container {
+.split-layout-container {
     box-sizing: border-box;
     display: grid;
     grid-gap: 0;
 }
 
-.split-pane-gutter {
+.split-layout-gutter {
     z-index: 100;
 }
 
-.split-pane-container.split-horizontal {
+.split-layout-container.split-horizontal {
     grid-template-columns: auto 5px 5px auto;
 }
 
-.split-pane-container.split-horizontal > .split-pane-element,
-.split-pane-container.split-horizontal > .split-pane-gutter {
+.split-layout-container.split-horizontal > .split-layout-element,
+.split-layout-container.split-horizontal > .split-layout-gutter {
     height 100%;
     grid-row: 1;
 }
 
-.split-pane-container.split-horizontal >.split-pane-element:first-child {
+.split-layout-container.split-horizontal >.split-layout-element:first-child {
     grid-column: 1 / 3;
 }
 
-.split-pane-container.split-horizontal >.split-pane-element:last-child {
+.split-layout-container.split-horizontal >.split-layout-element:last-child {
     grid-column: 3 / 5;
 }
 
-.split-pane-container.split-horizontal > .split-pane-gutter {
+.split-layout-container.split-horizontal > .split-layout-gutter {
     cursor: ew-resize;
     grid-column: 2 / 4;
 }
 
-.split-pane-container.split-vertical {
+.split-layout-container.split-vertical {
     grid-template-rows: auto 5px 5px auto;
 }
 
-.split-pane-container.split-vertical > .split-pane-element,
-.split-pane-container.split-vertical > .split-pane-gutter {
+.split-layout-container.split-vertical > .split-layout-element,
+.split-layout-container.split-vertical > .split-layout-gutter {
     grid-column: 1;
 }
 
-.split-pane-container.split-vertical >.split-pane-element:first-child {
+.split-layout-container.split-vertical >.split-layout-element:first-child {
     grid-row: 1 / 3;
 }
 
-.split-pane-container.split-vertical >.split-pane-element:last-child {
+.split-layout-container.split-vertical >.split-layout-element:last-child {
     grid-row: 3 / 5;
 }
 
-.split-pane-container.split-vertical > .split-pane-gutter {
+.split-layout-container.split-vertical > .split-layout-gutter {
     cursor: ns-resize;
     grid-row: 2 / 4;
 }
