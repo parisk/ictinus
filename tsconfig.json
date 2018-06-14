@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "sourceMap": true,
+    "removeComments": true,
+    "noUnusedLocals": true,
+    "allowJs": true,
+    "outDir": "dist",
+    "experimentalDecorators": true,
+  },
+  "include": ["src/*"]
+}

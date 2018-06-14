@@ -1,7 +1,7 @@
 {
   "name": "layout",
   "version": "0.1.0",
-  "main": "src/main.ts",
+  "main": "dist/main.js",
   "author": "Paris Kasidiaris <paris@sourcelair.com>",
   "license": "MIT",
   "private": true,
@@ -11,6 +11,7 @@
     "typescript": "^2.9.1"
   },
   "scripts": {
-    "start": "http-server ./public/"
+    "start": "http-server ./public/",
+    "tsc": "tsc"
   }
 }
