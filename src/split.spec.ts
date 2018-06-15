@@ -122,4 +122,83 @@ describe('SplitLayout', () => {
       );
     });
   });
+
+  describe('#setSize', () => {
+    const horizontalContainer = document.createElement('div');
+    const horizontalLayout = new SplitLayout(horizontalContainer, 'horizontal', 64);
+    const verticalContainer = document.createElement('div');
+    const verticalLayout = new SplitLayout(verticalContainer, 'vertical', 32);
+
+    // Create a 800px ⨉ 400px DOMRect with 100px distance from the top of the screen and
+    // 600px distance from the left of the screen.
+    const rect = new DOMRect(600, 100, 800, 400);
+
+    before(() => {
+      const mouseDownEvent = new MouseEvent('mousedown', {});
+
+      // The `getBoundingClientRect` method of each layout's container should return the
+      // `rect` object created above.
+      chai.spy.on(horizontalLayout.container, 'getBoundingClientRect', <any>(() => rect));
+      chai.spy.on(verticalLayout.container, 'getBoundingClientRect', <any>(() => rect));
+
+      horizontalLayout.startResize(mouseDownEvent);
+      verticalLayout.startResize(mouseDownEvent);
+    });
+
+    it('should do nothing if the provided value exceeds min or max values', () => {
+      const initialHorizontalStyle = horizontalLayout.container.style.gridTemplateColumns;
+      const initialVerticalStyle = verticalLayout.container.style.gridTemplateRows;
+
+      horizontalLayout.setSize(63);  // Too small
+      chai.assert.equal(
+        horizontalLayout.container.style.gridTemplateColumns, initialHorizontalStyle,
+      );
+
+      verticalLayout.setSize(31);  // Too small
+      chai.assert.equal(
+        verticalLayout.container.style.gridTemplateRows, initialVerticalStyle,
+      );
+
+      horizontalLayout.setSize(rect.width - 63);  // Too big
+      chai.assert.equal(
+        horizontalLayout.container.style.gridTemplateColumns, initialHorizontalStyle,
+      );
+
+      verticalLayout.setSize(rect.height - 31);  // Too big
+      chai.assert.equal(
+        verticalLayout.container.style.gridTemplateRows, initialVerticalStyle,
+      );
+    });
+
+    it('should set the appropriate proportional grid dimensions', () => {
+      horizontalLayout.setSize(160);  // 20% of 800px width
+      chai.assert.equal(
+        horizontalLayout.container.style.gridTemplateColumns,
+        '20.000% 5px 5px auto',
+      );
+
+      verticalLayout.setSize(40);  // 10% of 400px height
+      chai.assert.equal(
+        verticalLayout.container.style.gridTemplateRows,
+        '10.000% 5px 5px auto',
+      );
+    });
+  });
+
+  describe('#stopResize', () => {
+    const container = document.createElement('div');
+    const layout = new SplitLayout(container, 'horizontal');
+    const mouseUpEvent = new MouseEvent('mouseup', {});
+
+    before(() => {
+      chai.spy.on(layout.container, 'removeEventListener');
+      layout.stopResize(mouseUpEvent);
+    });
+
+    it('should remove the `resize` callback from the `mousemove` event on the container', () => {
+      chai.expect(layout.container.removeEventListener).to.have.been.called.once.with(
+        'mousemove', <any>layout.resize,
+      );
+    });
+  });
 });

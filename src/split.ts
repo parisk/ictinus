@@ -34,7 +34,7 @@ export class BareSplitLayout {
     this.setSize(size);
   }
 
-  public setSize(size) {
+  public setSize(size: number) {
     if (size < this.min || size > this.max) {
       return;
     }
