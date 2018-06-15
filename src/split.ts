@@ -30,6 +30,7 @@ export class BareSplitLayout {
 
   public resize = e => {
     const size = e[this.axis] - this.rect[this.rectAxis];
+
     this.setSize(size);
   }
 
