@@ -9,31 +9,46 @@ chai.use(spies);
 describe('SplitLayout', () => {
   describe('#constructor', () => {
     const container = document.createElement('div');
-    const elementA = document.createElement('div')
     const gutter = document.createElement('div');
-    const elementB = document.createElement('div')
-
-    elementA.classList.add('split-layout-element');
-    gutter.classList.add('split-layout-gutter');
-    elementB.classList.add('split-layout-element');
-
-    container.appendChild(elementA);
-    container.appendChild(gutter);
-    container.appendChild(elementB);
 
     gutter.addEventListener = chai.spy();
 
-    const layout = new SplitLayout(container, 'horizontal');
+    const layout = new SplitLayout(container, 'horizontal', 100, undefined, gutter);
 
     it('should add the appropriate classes to the SplitLayout container', () => {
       chai.assert.isTrue(container.classList.contains('split-layout-container'));
       chai.assert.isTrue(container.classList.contains('split-horizontal'));
     });
 
-    it('should add the appropriate mousedown callback to the gutter', () => {
+    it('should add the appropriate `mousedown` callback on the gutter', () => {
       chai.expect(gutter.addEventListener).to.have.been.called.once.with(
         'mousedown', <any>layout.startResize,
       );
     });
   });
+
+  describe('#startResize', () => {
+    const container = document.createElement('div');
+    const layout = new SplitLayout(container, 'horizontal');
+
+    chai.spy.on(container, 'addEventListener');
+    chai.spy.on(window, 'addEventListener');
+
+    // Dispatch the `mousedown` event, in order to trigger #startResize
+    const mouseDownEvent = document.createEvent('HTMLEvents')
+    mouseDownEvent.initEvent('mousedown', false, true);
+    layout.gutter.dispatchEvent(mouseDownEvent);
+
+    it('should set the appropriate `mousemove` callback on the container', () => {
+      chai.expect(container.addEventListener).to.have.been.called.once.with(
+        'mousemove', <any>layout.resize,
+      );
+    });
+
+    it('should set the appropriate `mouseup` callback on the window', () => {
+      chai.expect(window.addEventListener).to.have.been.called.once.with(
+        'mouseup', <any>layout.stopResize,
+      );
+    });
+  })
 });

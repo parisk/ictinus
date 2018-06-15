@@ -1,1 +1,1 @@
-export { SplitLayout } from './split';
+export { BareSplitLayout, SplitLayout } from './split';
