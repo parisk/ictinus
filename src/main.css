@@ -14,7 +14,7 @@
 
 .split-layout-container.split-horizontal > .split-layout-element,
 .split-layout-container.split-horizontal > .split-layout-gutter {
-    height 100%;
+    height: 100%;
     grid-row: 1;
 }
 
