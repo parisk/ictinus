@@ -4,7 +4,11 @@
   "main": "lib/main.js",
   "author": "Paris Kasidiaris <paris@sourcelair.com>",
   "license": "MIT",
-  "private": true,
+  "repository":
+  {
+    "type" : "git",
+    "url" : "https://github.com/sourcelair/ictinus.git"
+  },
   "devDependencies": {
     "@types/chai": "^4.1.4",
     "@types/chai-spies": "^0.0.1",
