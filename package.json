@@ -1,13 +1,12 @@
 {
   "name": "ictinus",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "lib/main.js",
   "author": "Paris Kasidiaris <paris@sourcelair.com>",
   "license": "MIT",
-  "repository":
-  {
-    "type" : "git",
-    "url" : "https://github.com/sourcelair/ictinus.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sourcelair/ictinus.git"
   },
   "devDependencies": {
     "@types/chai": "^4.1.4",
