@@ -5,11 +5,11 @@
   margin: 0 auto;
 }
 
-#horizontal-example .split-pane-element:first-child {
+#horizontal-example .split-layout-element:first-child {
   background-color: rgba(255, 0, 0, 0.5);
 }
 
-#horizontal-example .split-pane-element:last-child {
+#horizontal-example .split-layout-element:last-child {
   background-color: rgba(0, 0, 255, 0.5);
 }
 
@@ -20,10 +20,10 @@
   margin: 0 auto;
 }
 
-#vertical-example .split-pane-element:first-child {
+#vertical-example .split-layout-element:first-child {
   background-color: rgba(256, 0, 0, 0.5);
 }
 
-#vertical-example .split-pane-element:last-child {
+#vertical-example .split-layout-element:last-child {
   background-color: rgba(0, 0, 256, 0.5);
 }

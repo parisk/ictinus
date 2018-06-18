@@ -26,6 +26,6 @@
     "prepublish": "yarn tsc",
     "tsc": "tsc",
     "test": "mocha -r ts-node/register -r jsdom-global/register src/**/*.spec.ts",
-    "start": "http-server ./public/"
+    "start": "http-server ./demo/"
   }
 }

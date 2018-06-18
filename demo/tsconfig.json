@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "amd",
     "target": "es6",
     "sourceMap": true,
     "removeComments": true,
     "noUnusedLocals": true,
     "allowJs": true,
-    "outDir": "lib",
+    "outFile": "dist/main.js",
   },
-  "include": ["src/*"]
+  "files": ["main.ts"]
 }
