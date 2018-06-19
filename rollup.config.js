@@ -10,6 +10,12 @@ export default {
     sourcemap: true,
   },
   plugins: [
-    typescript(),
+    typescript({
+      tsconfigOverride: {
+        compilerOptions: {
+          module: 'esnext',
+        }
+      }
+    }),
   ]
 };
