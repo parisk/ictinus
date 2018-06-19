@@ -26,6 +26,7 @@
   "scripts": {
     "prepublish": "yarn tsc",
     "rollup": "rollup -c rollup.config.js",
+    "sass": "node-sass src/stylesheets/ictinus.scss --output dist --source-map true",
     "tsc": "tsc",
     "test": "mocha -r ts-node/register -r jsdom-global/register src/**/*.spec.ts",
     "start": "http-server ./demo/"
