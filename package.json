@@ -1,7 +1,7 @@
 {
   "name": "ictinus",
   "version": "0.2.1",
-  "main": "lib/main.js",
+  "main": "dist/main.js",
   "author": "Paris Kasidiaris <paris@sourcelair.com>",
   "license": "MIT",
   "repository": {
@@ -20,11 +20,12 @@
     "mocha": "^5.2.0",
     "node-sass": "^4.9.0",
     "rollup": "^0.60.7",
+    "rollup-plugin-typescript2": "^0.15.0",
     "ts-node": "^6.1.1",
     "typescript": "^2.9.1"
   },
   "scripts": {
-    "prepublish": "yarn tsc",
+    "prepublish": "yarn tsc && yarn rollup && yarn sass",
     "rollup": "rollup -c rollup.config.js",
     "sass": "node-sass src/stylesheets/ictinus.scss --output dist --source-map true",
     "tsc": "tsc",
