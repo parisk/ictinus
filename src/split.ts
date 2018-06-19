@@ -1,7 +1,5 @@
 export class BareSplitLayout {
-  public readonly elementA: HTMLElement;
   public readonly gutter: HTMLElement;
-  public readonly elementB: HTMLElement;
   private readonly dimension: 'width' | 'height';
   private readonly axis: 'clientX' | 'clientY';
   private readonly rectAxis: 'left' | 'top';
@@ -16,7 +14,15 @@ export class BareSplitLayout {
     this.dimension = (this.orientation == 'horizontal') ? 'width' : 'height';
     this.axis = (this.orientation == 'horizontal') ? 'clientX' : 'clientY';
     this.rectAxis = (this.orientation == 'horizontal') ? 'left' : 'top';
-    this.gutter = this.container.querySelector('.split-layout-gutter');
+
+    // We are not using querySelector, since we require the gutter to be an immediate child.
+    for (const element of this.container.children) {
+      if (element.classList.contains('split-layout-gutter')) {
+        this.gutter = <HTMLElement>element;
+        break;
+      }
+    }
+
     this.gutter.addEventListener('mousedown', this.startResize);
   }
 
@@ -53,7 +59,6 @@ export class BareSplitLayout {
 
 
 export class SplitLayout extends BareSplitLayout {
-
   constructor(
     container: HTMLElement,
     orientation: 'horizontal' | 'vertical',
