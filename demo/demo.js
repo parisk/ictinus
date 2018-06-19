@@ -1,5 +1,5 @@
 // Split Layout Examples
 document.addEventListener('DOMContentLoaded', () => {
-  new SplitLayout(document.querySelector('#horizontal-example'), 'horizontal');
-  new SplitLayout(document.querySelector('#vertical-example'), 'vertical', 20);
+  new ictinus.SplitLayout(document.querySelector('#horizontal-example'), 'horizontal');
+  new ictinus.SplitLayout(document.querySelector('#vertical-example'), 'vertical', 20);
 });
