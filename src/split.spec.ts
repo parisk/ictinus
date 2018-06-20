@@ -52,7 +52,6 @@ describe('SplitLayout', () => {
     const mouseDownEvent = document.createEvent('HTMLEvents');
 
     before(() => {
-      chai.spy.on(container, 'addEventListener');
       chai.spy.on(window, 'addEventListener');
 
       // Dispatch the `mousedown` event, in order to trigger #startResize
@@ -61,13 +60,13 @@ describe('SplitLayout', () => {
     });
 
     it('should set the appropriate `mousemove` callback on the container', () => {
-      chai.expect(container.addEventListener).to.have.been.called.once.with(
+      chai.expect(window.addEventListener).to.have.been.first.called.with(
         'mousemove', <any>layout.resize,
       );
     });
 
     it('should set the appropriate `mouseup` callback on the window', () => {
-      chai.expect(window.addEventListener).to.have.been.called.once.with(
+      chai.expect(window.addEventListener).to.have.been.second.called.with(
         'mouseup', <any>layout.stopResize,
       );
     });
@@ -191,12 +190,12 @@ describe('SplitLayout', () => {
     const mouseUpEvent = new MouseEvent('mouseup', {});
 
     before(() => {
-      chai.spy.on(layout.container, 'removeEventListener');
+      chai.spy.on(window, 'removeEventListener');
       layout.stopResize(mouseUpEvent);
     });
 
     it('should remove the `resize` callback from the `mousemove` event on the container', () => {
-      chai.expect(layout.container.removeEventListener).to.have.been.called.once.with(
+      chai.expect(window.removeEventListener).to.have.been.called.once.with(
         'mousemove', <any>layout.resize,
       );
     });

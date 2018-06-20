@@ -30,7 +30,7 @@ export class BareSplitLayout {
     e.stopPropagation();
     this.rect = <DOMRect>this.container.getBoundingClientRect();
     this.max = this.rect[this.dimension] - this.min;
-    this.container.addEventListener('mousemove', this.resize);
+    window.addEventListener('mousemove', this.resize);
     window.addEventListener('mouseup', this.stopResize);
   }
 
@@ -53,7 +53,7 @@ export class BareSplitLayout {
 
   public stopResize = e => {
     e.stopPropagation();
-    this.container.removeEventListener('mousemove', this.resize);
+    window.removeEventListener('mousemove', this.resize);
   }
 }
 
