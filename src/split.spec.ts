@@ -32,7 +32,7 @@ describe('SplitLayout', () => {
 
     gutter.addEventListener = chai.spy();
 
-    const layout = new SplitLayout(container, 'horizontal', 100, undefined, gutter);
+    const layout = new SplitLayout(container, 'horizontal', 100, undefined, undefined, gutter);
 
     it('should add the appropriate classes to the SplitLayout container', () => {
       chai.assert.isTrue(container.classList.contains('split-layout-container'));
@@ -130,9 +130,15 @@ describe('SplitLayout', () => {
 
   describe('#setSize', () => {
     const horizontalContainer = document.createElement('div');
-    const horizontalLayout = new SplitLayout(horizontalContainer, 'horizontal', 64);
+    const horizontalOnResizeCallback = chai.spy();
+    const horizontalLayout = new SplitLayout(
+      horizontalContainer, 'horizontal', 64, horizontalOnResizeCallback,
+    );
     const verticalContainer = document.createElement('div');
-    const verticalLayout = new SplitLayout(verticalContainer, 'vertical', 32);
+    const verticalOnResizeCallback = chai.spy();
+    const verticalLayout = new SplitLayout(
+      verticalContainer, 'vertical', 32, verticalOnResizeCallback,
+    );
 
     // Create a 800px ⨉ 400px DOMRect with 100px distance from the top of the screen and
     // 600px distance from the left of the screen.
@@ -148,6 +154,14 @@ describe('SplitLayout', () => {
 
       horizontalLayout.startResize(mouseDownEvent);
       verticalLayout.startResize(mouseDownEvent);
+    });
+
+    it('should fire the onResize callback with the appropriate parameter', () => {
+      horizontalLayout.setSize(160);  // 20% of 800px width
+      chai.expect(horizontalOnResizeCallback).to.be.called.once.with(<any>20);
+
+      verticalLayout.setSize(40);  // 10% of 400px height
+      chai.expect(verticalOnResizeCallback).to.be.called.once.with(<any>10);
     });
 
     it('should do nothing if the provided value exceeds min or max values', () => {

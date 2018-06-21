@@ -12,7 +12,8 @@ export class BareSplitLayout extends BaseLayout {
 
   constructor(
     container: HTMLElement,
-    public readonly min: number = 100)
+    public readonly min: number = 100,
+    public readonly onResize: Function = null)
   {
     super(container);
     this.orientation = (
@@ -61,6 +62,10 @@ export class BareSplitLayout extends BaseLayout {
     const cssProperty = (this.orientation == 'horizontal') ? 'gridTemplateColumns' : 'gridTemplateRows';
 
     this.container.style[cssProperty] = `${ratio.toFixed(3)}% 5px 5px auto`;
+
+    if (this.onResize) {
+      this.onResize.call(this, ratio);
+    }
   }
 
   public stopResize = e => {
@@ -76,9 +81,10 @@ export class SplitLayout extends BareSplitLayout {
     container: HTMLElement,
     orientation: 'horizontal' | 'vertical',
     min: number = 100,
+    onResize: Function = null,
     elementA: HTMLElement = document.createElement('div'),
     gutter: HTMLElement = document.createElement('div'),
-    elementB: HTMLElement = document.createElement('div'),)
+    elementB: HTMLElement = document.createElement('div'))
   {
     container.classList.add('split-layout-container', `split-${orientation}`);
     elementA.classList.add('split-layout-element');
@@ -89,6 +95,6 @@ export class SplitLayout extends BareSplitLayout {
     container.appendChild(gutter);
     container.appendChild(elementB);
 
-    super(container, min);
+    super(container, min, onResize);
   }
 }
