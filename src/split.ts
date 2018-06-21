@@ -26,12 +26,17 @@ export class BareSplitLayout {
     this.gutter.addEventListener('mousedown', this.startResize);
   }
 
+  public cancelSelection = e => {
+    e.preventDefault();
+  }
+
   public startResize = e => {
     e.stopPropagation();
     this.rect = <DOMRect>this.container.getBoundingClientRect();
     this.max = this.rect[this.dimension] - this.min;
     window.addEventListener('mousemove', this.resize);
     window.addEventListener('mouseup', this.stopResize);
+    window.addEventListener('selectstart', this.cancelSelection);
   }
 
   public resize = e => {
@@ -54,6 +59,7 @@ export class BareSplitLayout {
   public stopResize = e => {
     e.stopPropagation();
     window.removeEventListener('mousemove', this.resize);
+    window.removeEventListener('selectstart', this.cancelSelection);
   }
 }
 

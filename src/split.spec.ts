@@ -71,6 +71,12 @@ describe('SplitLayout', () => {
       );
     });
 
+    it('should cancel selection via `selectstart` on the window', () => {
+      chai.expect(window.addEventListener).to.have.been.third.called.with(
+        'selectstart', <any>layout.cancelSelection,
+      );
+    });
+
     after(() => {
       const spy = <any>(chai.spy);
       spy.restore(window, 'addEventListener');
@@ -194,9 +200,20 @@ describe('SplitLayout', () => {
       layout.stopResize(mouseUpEvent);
     });
 
+    after(() => {
+      const spy = <any>(chai.spy);
+      spy.restore(window, 'removeEventListener');
+    });
+
     it('should remove the `resize` callback from the `mousemove` event on the container', () => {
-      chai.expect(window.removeEventListener).to.have.been.called.once.with(
+      chai.expect(window.removeEventListener).to.have.been.first.called.with(
         'mousemove', <any>layout.resize,
+      );
+    });
+
+    it('should restore selection on window', () => {
+      chai.expect(window.removeEventListener).to.have.been.second.called.with(
+        'selectstart', <any>layout.cancelSelection,
       );
     });
   });
