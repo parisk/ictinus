@@ -1,2 +1,1 @@
-import { BareSplitLayout, SplitLayout } from './split';
-export { BareSplitLayout, SplitLayout };
+export { BareSplitLayout, SplitLayout } from './split';

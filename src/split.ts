@@ -1,5 +1,9 @@
-export class BareSplitLayout {
+import { BaseLayout } from './base';
+
+
+export class BareSplitLayout extends BaseLayout {
   public readonly gutter: HTMLElement;
+  public readonly orientation: 'horizontal' | 'vertical';
   private readonly dimension: 'width' | 'height';
   private readonly axis: 'clientX' | 'clientY';
   private readonly rectAxis: 'left' | 'top';
@@ -7,10 +11,13 @@ export class BareSplitLayout {
   private rect: DOMRect;
 
   constructor(
-    public readonly container: HTMLElement,
-    public readonly orientation: 'horizontal' | 'vertical',
+    container: HTMLElement,
     public readonly min: number = 100)
   {
+    super(container);
+    this.orientation = (
+      this.container.classList.contains('split-vertical')
+    ) ? 'vertical' : 'horizontal';
     this.dimension = (this.orientation == 'horizontal') ? 'width' : 'height';
     this.axis = (this.orientation == 'horizontal') ? 'clientX' : 'clientY';
     this.rectAxis = (this.orientation == 'horizontal') ? 'left' : 'top';
@@ -82,6 +89,6 @@ export class SplitLayout extends BareSplitLayout {
     container.appendChild(gutter);
     container.appendChild(elementB);
 
-    super(container, orientation, min);
+    super(container, min);
   }
 }
