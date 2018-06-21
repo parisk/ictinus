@@ -1,6 +1,6 @@
 {
   "name": "ictinus",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "main": "dist/ictinus.js",
   "author": "Paris Kasidiaris <paris@sourcelair.com>",
   "license": "MIT",
