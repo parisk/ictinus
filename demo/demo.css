@@ -6,45 +6,29 @@
   background: rgba(192, 192, 192, 0.3);
 }
 
-#horizontal-example {
-  width: 60vw;
-  height: 200px;
-  margin: 0 auto;
-}
-
-#horizontal-example .split-layout-element {
-  max-height: 100%;
-  overflow: auto;
-}
-
-#horizontal-example .split-layout-element:first-child {
+.split-layout-element:first-child {
   background-color: rgba(204, 255, 204, 0.7);
 }
 
-#horizontal-example .split-layout-element:last-child {
+.split-layout-element:last-child {
   background-color: rgba(255, 255, 204, 0.7);
+}
+
+#horizontal-example {
+  width: 60vw;
+  height: 200px;
+}
+
+.#horizontal-example .split-layout-container.split-horizontal > .split-layout-element {
+    min-width: 25%;
 }
 
 #vertical-example {
   height: 40vh;
   width: 200px;
-  background: green;
-  margin: 0 auto;
 }
 
 #vertical-width .split-layout-element {
   max-height: 100%;
   overflow: auto;
-}
-
-#vertical-example .split-layout-element:first-child {
-  background-color: rgba(256, 0, 0, 0.5);
-}
-
-#vertical-example .split-layout-element:last-child {
-  background-color: rgba(0, 0, 256, 0.5);
-}
-
-.#horizontal-example .split-layout-container.split-horizontal > .split-layout-element {
-    min-width: 25%;
 }

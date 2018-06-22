@@ -8,6 +8,14 @@ $split-layout-element-min-size: 100px;
   display: flex;
   align-items: stretch;
 
+  > .split-layout-element {
+    overflow: auto;
+
+    &:last-child {
+      flex: 1;
+    }
+  }
+
   &.split-transparent-gutter {
     > .split-layout-element,
     > .split-layout-gutter, {
@@ -34,10 +42,6 @@ $split-layout-element-min-size: 100px;
         margin-right: -$split-layout-gutter-size;
       }
     }
-  }
-
-  > .split-layout-element:last-child {
-    flex: 1;
   }
 
   &.split-horizontal {
