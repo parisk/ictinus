@@ -22,7 +22,7 @@ export class BareSplitLayout extends BaseLayout {
     this.rectAxis = (this.orientation == 'horizontal') ? 'left' : 'top';
 
     // We are not using querySelector, since we require the gutter to be an immediate child.
-    for (const element of this.container.children) {
+    for (const element of Array.from(this.container.children)) {
       if (element.classList.contains('split-layout-gutter')) {
         this.gutter = <HTMLElement>element;
         break;
@@ -57,6 +57,7 @@ export class BareSplitLayout extends BaseLayout {
     element.style[this.dimension] = `${ratio.toFixed(3)}%`;
 
     if (this.onResize) {
+      console.debug('on resize', this.onResize);
       this.onResize.call(this, ratio);
     }
   }
