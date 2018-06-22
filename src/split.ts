@@ -30,7 +30,6 @@ export class BareSplitLayout extends BaseLayout {
     }
 
     this.gutter.addEventListener('mousedown', this.startResize);
-    this.gutter.addEventListener('touchstart', this.startResize);
   }
 
   public cancelSelection = e => {
@@ -41,10 +40,7 @@ export class BareSplitLayout extends BaseLayout {
     e.stopPropagation();
     this.rect = <DOMRect>this.container.getBoundingClientRect();
     window.addEventListener('mousemove', this.resize);
-    window.addEventListener('touchmove', this.resize);
     window.addEventListener('mouseup', this.stopResize);
-    window.addEventListener('touchend', this.stopResize);
-    window.addEventListener('touchcancel', this.stopResize);
     window.addEventListener('selectstart', this.cancelSelection);
   }
 
@@ -68,10 +64,7 @@ export class BareSplitLayout extends BaseLayout {
   public stopResize = e => {
     e.stopPropagation();
     window.removeEventListener('mousemove', this.resize);
-    window.removeEventListener('touchmove', this.resize);
     window.removeEventListener('mouseup', this.stopResize);
-    window.removeEventListener('touchend', this.stopResize);
-    window.removeEventListener('touchcancel', this.stopResize);
     window.removeEventListener('selectstart', this.cancelSelection);
   }
 }

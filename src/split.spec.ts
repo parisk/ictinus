@@ -192,14 +192,20 @@ describe('SplitLayout', () => {
       spy.restore(window, 'removeEventListener');
     });
 
-    it('should remove the `resize` callback from the `mousemove` event on the container', () => {
+    it('should remove the `resize` callback from the `mousemove` event on the window', () => {
       chai.expect(window.removeEventListener).to.have.been.first.called.with(
         'mousemove', <any>layout.resize,
       );
     });
 
-    it('should restore selection on window', () => {
+    it('should remove the `stopResize` callback from the `mouseup` event on the window', () => {
       chai.expect(window.removeEventListener).to.have.been.second.called.with(
+        'mouseup', <any>layout.stopResize,
+      );
+    });
+
+    it('should restore selection on window', () => {
+      chai.expect(window.removeEventListener).to.have.been.third.called.with(
         'selectstart', <any>layout.cancelSelection,
       );
     });
