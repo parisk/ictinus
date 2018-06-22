@@ -1,6 +1,6 @@
 # Ictinus
 
-[![Build Status](https://travis-ci.com/sourcelair/ictinus.svg?branch=master)](https://travis-ci.com/sourcelair/ictinus) [![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/ictinus.svg)](https://img.shields.io/bundlephobia/minzip/ictinus.svg)
+[![Build Status](https://travis-ci.com/sourcelair/ictinus.svg?branch=master)](https://travis-ci.com/sourcelair/ictinus) [![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/ictinus.svg)](https://bundlephobia.com/result?p=ictinus)
 
 
 Ictinus is a set of tools for architecting layouts in HTML, CSS or JavaScript.
