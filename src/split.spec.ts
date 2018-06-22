@@ -32,7 +32,7 @@ describe('SplitLayout', () => {
 
     gutter.addEventListener = chai.spy();
 
-    const layout = new SplitLayout(container, 'horizontal', 100, undefined, undefined, gutter);
+    const layout = new SplitLayout(container, 'horizontal', undefined, undefined, gutter);
 
     it('should add the appropriate classes to the SplitLayout container', () => {
       chai.assert.isTrue(container.classList.contains('split-layout-container'));
@@ -132,12 +132,12 @@ describe('SplitLayout', () => {
     const horizontalContainer = document.createElement('div');
     const horizontalOnResizeCallback = chai.spy();
     const horizontalLayout = new SplitLayout(
-      horizontalContainer, 'horizontal', 64, horizontalOnResizeCallback,
+      horizontalContainer, 'horizontal', horizontalOnResizeCallback,
     );
     const verticalContainer = document.createElement('div');
     const verticalOnResizeCallback = chai.spy();
     const verticalLayout = new SplitLayout(
-      verticalContainer, 'vertical', 32, verticalOnResizeCallback,
+      verticalContainer, 'vertical', verticalOnResizeCallback,
     );
 
     // Create a 800px ⨉ 400px DOMRect with 100px distance from the top of the screen and
@@ -153,54 +153,27 @@ describe('SplitLayout', () => {
       chai.spy.on(verticalLayout.container, 'getBoundingClientRect', <any>(() => rect));
 
       horizontalLayout.startResize(mouseDownEvent);
+      horizontalLayout.setSize(160);  // 20% of 800px width
+
       verticalLayout.startResize(mouseDownEvent);
+      verticalLayout.setSize(40);  // 10% of 400px height
     });
 
     it('should fire the onResize callback with the appropriate parameter', () => {
-      horizontalLayout.setSize(160);  // 20% of 800px width
       chai.expect(horizontalOnResizeCallback).to.be.called.once.with(<any>20);
-
-      verticalLayout.setSize(40);  // 10% of 400px height
       chai.expect(verticalOnResizeCallback).to.be.called.once.with(<any>10);
     });
 
-    it('should do nothing if the provided value exceeds min or max values', () => {
-      const initialHorizontalStyle = horizontalLayout.container.style.gridTemplateColumns;
-      const initialVerticalStyle = verticalLayout.container.style.gridTemplateRows;
-
-      horizontalLayout.setSize(63);  // Too small
-      chai.assert.equal(
-        horizontalLayout.container.style.gridTemplateColumns, initialHorizontalStyle,
-      );
-
-      verticalLayout.setSize(31);  // Too small
-      chai.assert.equal(
-        verticalLayout.container.style.gridTemplateRows, initialVerticalStyle,
-      );
-
-      horizontalLayout.setSize(rect.width - 63);  // Too big
-      chai.assert.equal(
-        horizontalLayout.container.style.gridTemplateColumns, initialHorizontalStyle,
-      );
-
-      verticalLayout.setSize(rect.height - 31);  // Too big
-      chai.assert.equal(
-        verticalLayout.container.style.gridTemplateRows, initialVerticalStyle,
-      );
-    });
-
     it('should set the appropriate proportional grid dimensions', () => {
-      horizontalLayout.setSize(160);  // 20% of 800px width
-      chai.assert.equal(
-        horizontalLayout.container.style.gridTemplateColumns,
-        '20.000% 5px 5px auto',
+      const horizontalElement = horizontalLayout.container.querySelector(
+        '.split-layout-element:first-child'
       );
+      chai.assert.equal((<HTMLElement>horizontalElement).style.width, '20.000%');
 
-      verticalLayout.setSize(40);  // 10% of 400px height
-      chai.assert.equal(
-        verticalLayout.container.style.gridTemplateRows,
-        '10.000% 5px 5px auto',
+      const verticalElement = verticalLayout.container.querySelector(
+        '.split-layout-element:first-child'
       );
+      chai.assert.equal((<HTMLElement>verticalElement).style.height, '10.000%');
     });
   });
 

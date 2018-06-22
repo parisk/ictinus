@@ -7,12 +7,10 @@ export class BareSplitLayout extends BaseLayout {
   private readonly dimension: 'width' | 'height';
   private readonly axis: 'clientX' | 'clientY';
   private readonly rectAxis: 'left' | 'top';
-  private max: number;
   private rect: DOMRect;
 
   constructor(
     container: HTMLElement,
-    public readonly min: number = 100,
     public readonly onResize: Function = null)
   {
     super(container);
@@ -41,7 +39,6 @@ export class BareSplitLayout extends BaseLayout {
   public startResize = e => {
     e.stopPropagation();
     this.rect = <DOMRect>this.container.getBoundingClientRect();
-    this.max = this.rect[this.dimension] - this.min;
     window.addEventListener('mousemove', this.resize);
     window.addEventListener('mouseup', this.stopResize);
     window.addEventListener('selectstart', this.cancelSelection);
@@ -54,10 +51,6 @@ export class BareSplitLayout extends BaseLayout {
   }
 
   public setSize(size: number) {
-    if (size < this.min || size > this.max) {
-      return;
-    }
-
     const ratio = size / this.rect[this.dimension] * 100;
     const element = <HTMLElement>this.container.querySelector('.split-layout-element:first-child');
 
@@ -80,7 +73,6 @@ export class SplitLayout extends BareSplitLayout {
   constructor(
     container: HTMLElement,
     orientation: 'horizontal' | 'vertical',
-    min: number = 100,
     onResize: Function = null,
     elementA: HTMLElement = document.createElement('div'),
     gutter: HTMLElement = document.createElement('div'),
@@ -95,6 +87,6 @@ export class SplitLayout extends BareSplitLayout {
     container.appendChild(gutter);
     container.appendChild(elementB);
 
-    super(container, min, onResize);
+    super(container, onResize);
   }
 }
