@@ -59,9 +59,9 @@ export class BareSplitLayout extends BaseLayout {
     }
 
     const ratio = size / this.rect[this.dimension] * 100;
-    const cssProperty = (this.orientation == 'horizontal') ? 'gridTemplateColumns' : 'gridTemplateRows';
+    const element = <HTMLElement>this.container.querySelector('.split-layout-element:first-child');
 
-    this.container.style[cssProperty] = `${ratio.toFixed(3)}% 5px 5px auto`;
+    element.style[this.dimension] = `${ratio.toFixed(3)}%`;
 
     if (this.onResize) {
       this.onResize.call(this, ratio);
